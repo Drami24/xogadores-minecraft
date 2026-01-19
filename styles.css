@@ -1,0 +1,447 @@
+:root {
+    --primary: #47cf73;
+    /* Verde Esmeralda Minecraft */
+    --primary-dark: #2e8b4d;
+    --accent: #ffae00;
+    /* Oro */
+    --bg-sky: #1e2532;
+    /* Azul noche profundo */
+    --bg-sky-light: #304a6e;
+    --card-bg: #18181b;
+    /* Gris casi negro */
+    --text-main: #ffffff;
+    --text-dim: #94a3b8;
+
+    --font-pixel: 'Press Start 2P', cursive;
+    --font-tech: 'Rajdhani', sans-serif;
+    /* Fuente moderna para leer bien */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--bg-sky), var(--bg-sky-light));
+    font-family: var(--font-tech);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-main);
+    perspective: 1000px;
+    /* Para efectos 3D */
+}
+
+/* --- FONDO ANIMADO --- */
+.sky-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+/* Nubes estilo Pixel (Hechas con Box-Shadow) */
+.cloud {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.05);
+    width: 120px;
+    height: 40px;
+    box-shadow:
+        40px 0 0 rgba(255, 255, 255, 0.05),
+        -40px 0 0 rgba(255, 255, 255, 0.05),
+        20px -30px 0 rgba(255, 255, 255, 0.05),
+        -20px 30px 0 rgba(255, 255, 255, 0.05);
+    opacity: 0.6;
+}
+
+.cloud-1 {
+    top: 15%;
+    left: -20%;
+    animation: drift 45s linear infinite;
+    transform: scale(1.5);
+}
+
+.cloud-2 {
+    top: 60%;
+    left: -30%;
+    animation: drift 65s linear infinite 5s;
+    transform: scale(0.8);
+}
+
+.cloud-3 {
+    top: 85%;
+    left: -10%;
+    animation: drift 55s linear infinite 2s;
+}
+
+@keyframes drift {
+    from {
+        left: -20%;
+    }
+
+    to {
+        left: 120%;
+    }
+}
+
+/* Partículas (Luciernagas/Experiencia) */
+.particles span {
+    position: absolute;
+    bottom: -50px;
+    background: transparent;
+    box-shadow: 0 0 10px var(--primary);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    /* Ojo: Cuadrado (0%) si quieres pixel perfect */
+    animation: rise 15s infinite linear;
+    opacity: 0;
+}
+
+/* Generamos posiciones aleatorias con CSS child selectors */
+.particles span:nth-child(1) {
+    left: 10%;
+    animation-duration: 8s;
+    background: var(--primary);
+}
+
+.particles span:nth-child(2) {
+    left: 20%;
+    animation-duration: 12s;
+    background: var(--accent);
+}
+
+.particles span:nth-child(3) {
+    left: 35%;
+    animation-duration: 10s;
+    background: var(--primary);
+}
+
+.particles span:nth-child(4) {
+    left: 50%;
+    animation-duration: 15s;
+    background: #fff;
+}
+
+.particles span:nth-child(5) {
+    left: 65%;
+    animation-duration: 9s;
+    background: var(--primary);
+}
+
+.particles span:nth-child(6) {
+    left: 80%;
+    animation-duration: 11s;
+    background: var(--accent);
+}
+
+.particles span:nth-child(odd) {
+    width: 6px;
+    height: 6px;
+    border-radius: 0;
+}
+
+/* Cuadrados */
+
+@keyframes rise {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* --- CONTENEDOR CENTRAL --- */
+.main-wrapper {
+    text-align: center;
+    z-index: 10;
+    width: 90%;
+    max-width: 450px;
+    animation: fadeIn 1s ease-out;
+}
+
+/* Título */
+.title-container {
+    margin-bottom: 2rem;
+}
+
+.glitch-title {
+    font-family: var(--font-pixel);
+    font-size: 2.5rem;
+    color: #fff;
+    text-shadow: 4px 4px 0px #000;
+    position: relative;
+    letter-spacing: -2px;
+}
+
+/* Subrayado neón */
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--accent);
+    letter-spacing: 4px;
+    margin-top: 10px;
+    text-shadow: 0 0 10px rgba(255, 174, 0, 0.5);
+}
+
+/* --- TARJETA FLOTANTE (ISLAND) --- */
+.floating-island {
+    position: relative;
+    background: var(--card-bg);
+    border: 4px solid #000;
+    /* Sombras duras para efecto bloque */
+    box-shadow:
+        12px 12px 0 rgba(0, 0, 0, 0.5),
+        inset 4px 4px 0 rgba(255, 255, 255, 0.1);
+    animation: float 6s ease-in-out infinite;
+    padding-top: 20px;
+    /* Espacio para la hierba */
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* "Hierba" arriba de la tarjeta (CSS Pattern) */
+.grass-topper {
+    position: absolute;
+    top: -12px;
+    left: -4px;
+    right: -4px;
+    height: 20px;
+    background-color: var(--primary);
+    background-image: linear-gradient(rgba(255, 255, 255, 0.2) 2px, transparent 2px);
+    border: 4px solid #000;
+    border-bottom: none;
+    z-index: 1;
+}
+
+.card-content {
+    padding: 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+/* Indicador de estado */
+.server-status {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 6px 12px;
+    border-radius: 4px;
+    margin-bottom: 25px;
+    font-size: 0.9rem;
+    color: var(--primary);
+    border: 1px solid rgba(71, 207, 115, 0.3);
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--primary);
+    margin-right: 8px;
+    box-shadow: 0 0 8px var(--primary);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Input IP */
+.info-group label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.ip-container {
+    background: #000;
+    border: 2px solid #333;
+    padding: 15px;
+    font-family: var(--font-pixel);
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #ddd;
+    margin-bottom: 25px;
+}
+
+.ip-container:hover {
+    border-color: var(--primary);
+    color: #fff;
+    box-shadow: 0 0 15px rgba(71, 207, 115, 0.2);
+}
+
+.copy-icon .icon-shape {
+    width: 14px;
+    height: 14px;
+    border: 2px solid #fff;
+    position: relative;
+}
+
+.copy-icon .icon-shape::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 100%;
+    height: 100%;
+    border-top: 2px solid #fff;
+    border-right: 2px solid #fff;
+}
+
+/* --- BOTÓN PRINCIPAL --- */
+.cta-button {
+    width: 100%;
+    position: relative;
+    background: none;
+    border: none;
+    cursor: pointer;
+    height: 60px;
+    margin-bottom: 20px;
+}
+
+.btn-face {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-pixel);
+    font-size: 1rem;
+    color: #fff;
+    border: 4px solid #000;
+    z-index: 2;
+    transition: transform 0.1s;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.btn-shadow {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    /* Sombra bloque */
+    border: 4px solid #000;
+    z-index: 1;
+}
+
+.cta-button:hover .btn-face {
+    background: #54e382;
+    /* Un poco más claro */
+}
+
+.cta-button:active .btn-face {
+    transform: translate(6px, 6px);
+}
+
+/* --- TOAST --- */
+.toast {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    z-index: 100;
+}
+
+.toast.active {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.toast-content {
+    background: #000;
+    color: var(--primary);
+    padding: 12px 24px;
+    font-family: var(--font-pixel);
+    font-size: 0.8rem;
+    border: 2px solid var(--primary);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Animación de entrada general */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 600px) {
+    .glitch-title {
+        font-size: 1.8rem;
+    }
+
+    .floating-island {
+        width: 100%;
+    }
+
+    .ip-container {
+        font-size: 0.75rem;
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}

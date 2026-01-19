@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xogadores Minecraft</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rajdhani:wght@500;700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="sky-container">
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
+    <div class="particles">
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <main class="main-wrapper">
+
+    <div class="title-container">
+      <h1 class="glitch-title" data-text="XOGADORES">XOGADORES</h1>
+      <h2 class="subtitle">MINECRAFT SERVER</h2>
+    </div>
+
+    <div class="floating-island">
+
+      <div class="grass-topper"></div>
+
+      <div class="card-content">
+        <div class="server-status">
+          <span class="pulse-dot"></span>
+          <span class="status-text">ONLINE &bull; JAVA 1.20+</span>
+        </div>
+
+        <div class="info-group">
+          <label>HOST / IP</label>
+          <div class="ip-container" onclick="copyIP()">
+            <span id="ip-text">mine.xogadores.com.es</span>
+            <div class="copy-icon">
+              <div class="icon-shape"></div>
+            </div>
+          </div>
+        </div>
+
+        <button class="cta-button" onclick="copyIP()">
+          <span class="btn-face">CONECTAR AHORA</span>
+          <span class="btn-shadow"></span>
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <div id="toast" class="toast">
+    <div class="toast-content">
+      <span class="check">✔</span> IP COPIADA
+    </div>
+  </div>
+
+  <script>
+    const SERVER_IP = "mine.xogadores.com.es";
+
+    function copyIP() {
+      navigator.clipboard.writeText(SERVER_IP).then(() => {
+        triggerToast();
+      }).catch(() => {
+        prompt("Copia la IP manualmente:", SERVER_IP);
+      });
+    }
+
+    function triggerToast() {
+      const toast = document.getElementById('toast');
+      toast.classList.add('active');
+      setTimeout(() => {
+        toast.classList.remove('active');
+      }, 2500);
+    }
+  </script>
+</body>
+
+</html>
